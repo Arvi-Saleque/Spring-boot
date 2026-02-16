@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Form</title>
+</head>
+<body>
+
+<h2 th:text="${course.id == null} ? 'Create Course' : 'Edit Course'"></h2>
+
+<!-- CREATE form -->
+<form th:if="${course.id == null}"
+      th:object="${course}"
+      th:action="@{/ui/courses}"
+      method="post">
+
+    <div>
+        <label for="title">Title:</label>
+        <input id="title" type="text" th:field="*{title}" required />
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        <input id="description" type="text" th:field="*{description}" />
+    </div>
+
+    <br/>
+    <button type="submit">Save</button>
+    <a th:href="@{/ui/courses}">Cancel</a>
+</form>
+
+<!-- UPDATE form -->
+<form th:if="${course.id != null}"
+      th:object="${course}"
+      th:action="@{/ui/courses/{id}/update(id=${course.id})}"
+      method="post">
+
+    <div>
+        <label for="title2">Title:</label>
+        <input id="title2" type="text" th:field="*{title}" required />
+    </div>
+
+    <div>
+        <label for="description2">Description:</label>
+        <input id="description2" type="text" th:field="*{description}" />
+    </div>
+
+    <br/>
+    <button type="submit">Update</button>
+    <a th:href="@{/ui/courses}">Cancel</a>
+</form>
+
+
+</body>
+</html>
